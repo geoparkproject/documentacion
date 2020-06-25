@@ -29,7 +29,7 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/",
+    "url": "https://servergeopark.herokuapp.com/",
     "title": "01.Home",
     "version": "1.0.0",
     "group": "General",
@@ -63,11 +63,11 @@ define({ "api": [
     },
     "filename": "doc/version_1_0_0/general.js",
     "groupTitle": "General",
-    "name": "Get"
+    "name": "GetHttpsServergeoparkHerokuappCom"
   },
   {
     "type": "get",
-    "url": "/users/profile",
+    "url": "https://servergeopark.herokuapp.com/users/profile",
     "title": "04.Visualizar dados",
     "version": "1.0.0",
     "group": "General",
@@ -136,7 +136,7 @@ define({ "api": [
     },
     "filename": "doc/version_1_0_0/general.js",
     "groupTitle": "General",
-    "name": "GetUsersProfile",
+    "name": "GetHttpsServergeoparkHerokuappComUsersProfile",
     "header": {
       "fields": {
         "Header": [
@@ -160,7 +160,7 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/recovery_password",
+    "url": "https://servergeopark.herokuapp.com/recovery_password",
     "title": "02.Email de Recuperação",
     "version": "1.0.0",
     "group": "General",
@@ -214,11 +214,11 @@ define({ "api": [
     },
     "filename": "doc/version_1_0_0/general.js",
     "groupTitle": "General",
-    "name": "PostRecovery_password"
+    "name": "PostHttpsServergeoparkHerokuappComRecovery_password"
   },
   {
     "type": "put",
-    "url": "/reset_password",
+    "url": "https://servergeopark.herokuapp.com/reset_password",
     "title": "03.Atualização da Senha",
     "version": "1.0.0",
     "group": "General",
@@ -296,11 +296,139 @@ define({ "api": [
     },
     "filename": "doc/version_1_0_0/general.js",
     "groupTitle": "General",
-    "name": "PutReset_password"
+    "name": "PutHttpsServergeoparkHerokuappComReset_password"
+  },
+  {
+    "type": "get",
+    "url": "https://servergeopark.herokuapp.com/solicitations/geosites/researcher",
+    "title": "03.Listar Solicitações",
+    "version": "1.0.0",
+    "group": "Mobile",
+    "description": "<p>Rota onde o pesquisador poderá listar todos as solicitações de pesquisas que ele precisa fazer.</p>",
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Id da solicitação</p>"
+          },
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "id_adm",
+            "description": "<p>Id do administrador que indicou a pesquisa</p>"
+          },
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "id_geosite_report",
+            "description": "<p>Id que representa qual relatório do geoparque essa pesquisa será atribuída</p>"
+          },
+          {
+            "group": "200",
+            "type": "Object",
+            "optional": false,
+            "field": "geosite",
+            "description": "<p>Informações do geossítio para a construção do arquivo de pesquisa</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "geosite.image_url",
+            "description": "<p>Imagem correspondente ao geossítio</p>"
+          },
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "geosite.id",
+            "description": "<p>Id do geossítio</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "geosite.name",
+            "description": "<p>Nome do geossítio</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "geosite.address",
+            "description": "<p>Endereço do geossítio</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "geosite.image",
+            "description": "<p>Nome do arquivo da imagem</p>"
+          },
+          {
+            "group": "200",
+            "type": "Array",
+            "optional": false,
+            "field": "geosite.attractions",
+            "description": "<p>Array Contendo informações de cada atração do geossítio para a devida pesquisa</p>"
+          },
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "geosite.attractions.id",
+            "description": "<p>Id da atração</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "geosite.attractions.name",
+            "description": "<p>Nome da atração</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n[\n  {\n    \"id\": 1,\n    \"id_adm\": 1,\n    \"id_geosite_report\": 1,\n    \"geosite\": {\n      \"image_url\": \"http://localhost:3333/files/user_profile/anonymous.png\",\n      \"id\": 3,\n      \"name\": \"Floresta Petrificada do Cariri\",\n      \"address\": \"Cidade - Ceará\",\n      \"image\": null,\n      \"attractions\": [\n        {\n          \"id\": 15,\n          \"name\": \"Rocky Wall\"\n        },\n        {\n          \"id\": 16,\n          \"name\": \"Fossil Trunks\"\n        }\n      ]\n    }\n  }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "doc/version_1_0_0/mobile.js",
+    "groupTitle": "Mobile",
+    "name": "GetHttpsServergeoparkHerokuappComSolicitationsGeositesResearcher",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Token necessário para a realização de autenticação</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header:",
+          "content": "{\n  \"authorization\": \"Bearer [token]\"\n}",
+          "type": "json"
+        }
+      ]
+    }
   },
   {
     "type": "post",
-    "url": "/sessions",
+    "url": "https://servergeopark.herokuapp.com/sessions",
     "title": "01.Login/Mobile",
     "version": "1.0.0",
     "group": "Mobile",
@@ -382,7 +510,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK    \n{\n    \"user\": {\n        \"email\": \"jonh@email.com\",\n        \"name\": \"Jonh Doe\",\n        \"user_type\": {\n            \"id\": 2,\n            \"type\": \"researcher\"\n        }\n    } \n    \"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c\"\n}",
+          "content": "HTTP/1.1 200 OK\n{\n    \"user\": {\n        \"email\": \"jonh@email.com\",\n        \"name\": \"Jonh Doe\",\n        \"user_type\": {\n            \"id\": 2,\n            \"type\": \"researcher\"\n        }\n    }\n    \"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c\"\n}",
           "type": "json"
         }
       ]
@@ -403,11 +531,11 @@ define({ "api": [
     },
     "filename": "doc/version_1_0_0/mobile.js",
     "groupTitle": "Mobile",
-    "name": "PostSessions"
+    "name": "PostHttpsServergeoparkHerokuappComSessions"
   },
   {
     "type": "put",
-    "url": "/users/researcher",
+    "url": "https://servergeopark.herokuapp.com/users/researcher",
     "title": "02.Atualizar os dados",
     "version": "1.0.0",
     "group": "Mobile",
@@ -510,7 +638,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK    \n{\n    \"avatar_url\": \"http://localhost:3333/files/user_profile/4c5a37ed8ede1b9efa0e993c2daac0fb.jpeg\",\n    \"id\": 15,\n    \"name\": \"Matheus Maximiano\",\n    \"genre\": \"M\",\n    \"email\": \"matheus@email.com\",\n    \"avatar\": \"4c5a37ed8ede1b9efa0e993c2daac0fb.jpeg\",\n    \"user_type\": {\n      \"id\": 2,\n      \"type\": \"researcher\"\n    },\n    \"updatedAt\": \"2020-05-08T20:56:07.094Z\"\n}",
+          "content": "HTTP/1.1 200 OK\n{\n    \"avatar_url\": \"http://localhost:3333/files/user_profile/4c5a37ed8ede1b9efa0e993c2daac0fb.jpeg\",\n    \"id\": 15,\n    \"name\": \"Matheus Maximiano\",\n    \"genre\": \"M\",\n    \"email\": \"matheus@email.com\",\n    \"avatar\": \"4c5a37ed8ede1b9efa0e993c2daac0fb.jpeg\",\n    \"user_type\": {\n      \"id\": 2,\n      \"type\": \"researcher\"\n    },\n    \"updatedAt\": \"2020-05-08T20:56:07.094Z\"\n}",
           "type": "json"
         }
       ]
@@ -526,7 +654,7 @@ define({ "api": [
     },
     "filename": "doc/version_1_0_0/mobile.js",
     "groupTitle": "Mobile",
-    "name": "PutUsersResearcher",
+    "name": "PutHttpsServergeoparkHerokuappComUsersResearcher",
     "header": {
       "fields": {
         "Header": [
@@ -550,7 +678,7 @@ define({ "api": [
   },
   {
     "type": "delete",
-    "url": "/geoparks/geosites/:id",
+    "url": "https://servergeopark.herokuapp.com/geoparks/geosites/:id",
     "title": "15.Deletar geossítios",
     "version": "1.0.0",
     "group": "Web",
@@ -619,7 +747,7 @@ define({ "api": [
     },
     "filename": "doc/version_1_0_0/web.js",
     "groupTitle": "Web",
-    "name": "DeleteGeoparksGeositesId",
+    "name": "DeleteHttpsServergeoparkHerokuappComGeoparksGeositesId",
     "header": {
       "fields": {
         "Header": [
@@ -643,7 +771,7 @@ define({ "api": [
   },
   {
     "type": "delete",
-    "url": "/geoparks/:id",
+    "url": "https://servergeopark.herokuapp.com/geoparks/:id",
     "title": "10.Deletar geoparques",
     "version": "1.0.0",
     "group": "Web",
@@ -707,7 +835,7 @@ define({ "api": [
     },
     "filename": "doc/version_1_0_0/web.js",
     "groupTitle": "Web",
-    "name": "DeleteGeoparksId",
+    "name": "DeleteHttpsServergeoparkHerokuappComGeoparksId",
     "header": {
       "fields": {
         "Header": [
@@ -731,7 +859,7 @@ define({ "api": [
   },
   {
     "type": "delete",
-    "url": "/users/:id",
+    "url": "https://servergeopark.herokuapp.com/users/:id",
     "title": "06.Deletar usuários",
     "version": "1.0.0",
     "group": "Web",
@@ -807,7 +935,7 @@ define({ "api": [
     },
     "filename": "doc/version_1_0_0/web.js",
     "groupTitle": "Web",
-    "name": "DeleteUsersId",
+    "name": "DeleteHttpsServergeoparkHerokuappComUsersId",
     "header": {
       "fields": {
         "Header": [
@@ -831,7 +959,7 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/geoparks",
+    "url": "https://servergeopark.herokuapp.com/geoparks",
     "title": "07.Listar todos os geoparques",
     "version": "1.0.0",
     "group": "Web",
@@ -914,7 +1042,7 @@ define({ "api": [
     },
     "filename": "doc/version_1_0_0/web.js",
     "groupTitle": "Web",
-    "name": "GetGeoparks",
+    "name": "GetHttpsServergeoparkHerokuappComGeoparks",
     "header": {
       "fields": {
         "Header": [
@@ -965,7 +1093,7 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/geoparks/geosites/:id",
+    "url": "https://servergeopark.herokuapp.com/geoparks/geosites/:id",
     "title": "12.Listar todos os geossítios",
     "version": "1.0.0",
     "group": "Web",
@@ -1083,7 +1211,7 @@ define({ "api": [
     },
     "filename": "doc/version_1_0_0/web.js",
     "groupTitle": "Web",
-    "name": "GetGeoparksGeositesId",
+    "name": "GetHttpsServergeoparkHerokuappComGeoparksGeositesId",
     "header": {
       "fields": {
         "Header": [
@@ -1107,7 +1235,7 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/geoparks/:id_geopark/geosites",
+    "url": "https://servergeopark.herokuapp.com/geoparks/:id_geopark/geosites",
     "title": "11.Listar todos os geossítios",
     "version": "1.0.0",
     "group": "Web",
@@ -1225,7 +1353,7 @@ define({ "api": [
     },
     "filename": "doc/version_1_0_0/web.js",
     "groupTitle": "Web",
-    "name": "GetGeoparksId_geoparkGeosites",
+    "name": "GetHttpsServergeoparkHerokuappComGeoparksId_geoparkGeosites",
     "header": {
       "fields": {
         "Header": [
@@ -1249,7 +1377,7 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/users",
+    "url": "https://servergeopark.herokuapp.com/users",
     "title": "02.Listar os usuários",
     "version": "1.0.0",
     "group": "Web",
@@ -1368,7 +1496,7 @@ define({ "api": [
     },
     "filename": "doc/version_1_0_0/web.js",
     "groupTitle": "Web",
-    "name": "GetUsers",
+    "name": "GetHttpsServergeoparkHerokuappComUsers",
     "header": {
       "fields": {
         "Header": [
@@ -1392,7 +1520,7 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/geoparks",
+    "url": "https://servergeopark.herokuapp.com/geoparks",
     "title": "08.Criar um geoparque",
     "version": "1.0.0",
     "group": "Web",
@@ -1534,7 +1662,7 @@ define({ "api": [
     },
     "filename": "doc/version_1_0_0/web.js",
     "groupTitle": "Web",
-    "name": "PostGeoparks",
+    "name": "PostHttpsServergeoparkHerokuappComGeoparks",
     "header": {
       "fields": {
         "Header": [
@@ -1558,7 +1686,7 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/geoparks/:id_geopark/geosites",
+    "url": "https://servergeopark.herokuapp.com/geoparks/:id_geopark/geosites",
     "title": "13.Criar um geossítio",
     "version": "1.0.0",
     "group": "Web",
@@ -1721,7 +1849,7 @@ define({ "api": [
     },
     "filename": "doc/version_1_0_0/web.js",
     "groupTitle": "Web",
-    "name": "PostGeoparksId_geoparkGeosites",
+    "name": "PostHttpsServergeoparkHerokuappComGeoparksId_geoparkGeosites",
     "header": {
       "fields": {
         "Header": [
@@ -1745,7 +1873,7 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/users",
+    "url": "https://servergeopark.herokuapp.com/users",
     "title": "03.Criar um usuário",
     "version": "1.0.0",
     "group": "Web",
@@ -1899,7 +2027,7 @@ define({ "api": [
     },
     "filename": "doc/version_1_0_0/web.js",
     "groupTitle": "Web",
-    "name": "PostUsers",
+    "name": "PostHttpsServergeoparkHerokuappComUsers",
     "header": {
       "fields": {
         "Header": [
@@ -1923,7 +2051,7 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/websessions",
+    "url": "https://servergeopark.herokuapp.com/websessions",
     "title": "01.Login/Web",
     "version": "1.0.0",
     "group": "Web",
@@ -2033,11 +2161,11 @@ define({ "api": [
     },
     "filename": "doc/version_1_0_0/web.js",
     "groupTitle": "Web",
-    "name": "PostWebsessions"
+    "name": "PostHttpsServergeoparkHerokuappComWebsessions"
   },
   {
     "type": "put",
-    "url": "/geoparks/geosites/:id",
+    "url": "https://servergeopark.herokuapp.com/geoparks/geosites/:id",
     "title": "14.Atualizar um geossítio",
     "version": "1.0.0",
     "group": "Web",
@@ -2205,7 +2333,7 @@ define({ "api": [
     },
     "filename": "doc/version_1_0_0/web.js",
     "groupTitle": "Web",
-    "name": "PutGeoparksGeositesId",
+    "name": "PutHttpsServergeoparkHerokuappComGeoparksGeositesId",
     "header": {
       "fields": {
         "Header": [
@@ -2229,7 +2357,7 @@ define({ "api": [
   },
   {
     "type": "put",
-    "url": "/geoparks/:id",
+    "url": "https://servergeopark.herokuapp.com/geoparks/:id",
     "title": "09.Atualizar um geoparque",
     "version": "1.0.0",
     "group": "Web",
@@ -2392,7 +2520,7 @@ define({ "api": [
     },
     "filename": "doc/version_1_0_0/web.js",
     "groupTitle": "Web",
-    "name": "PutGeoparksId",
+    "name": "PutHttpsServergeoparkHerokuappComGeoparksId",
     "header": {
       "fields": {
         "Header": [
@@ -2416,7 +2544,7 @@ define({ "api": [
   },
   {
     "type": "put",
-    "url": "/users/administrator",
+    "url": "https://servergeopark.herokuapp.com/users/administrator",
     "title": "05.Atualizar Administrador Logado",
     "version": "1.0.0",
     "group": "Web",
@@ -2577,7 +2705,7 @@ define({ "api": [
     },
     "filename": "doc/version_1_0_0/web.js",
     "groupTitle": "Web",
-    "name": "PutUsersAdministrator",
+    "name": "PutHttpsServergeoparkHerokuappComUsersAdministrator",
     "header": {
       "fields": {
         "Header": [
@@ -2601,7 +2729,7 @@ define({ "api": [
   },
   {
     "type": "put",
-    "url": "/users/:id",
+    "url": "https://servergeopark.herokuapp.com/users/:id",
     "title": "04.Atualizar usuários",
     "version": "1.0.0",
     "group": "Web",
@@ -2763,7 +2891,7 @@ define({ "api": [
     },
     "filename": "doc/version_1_0_0/web.js",
     "groupTitle": "Web",
-    "name": "PutUsersId",
+    "name": "PutHttpsServergeoparkHerokuappComUsersId",
     "header": {
       "fields": {
         "Header": [
