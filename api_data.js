@@ -798,6 +798,99 @@ define({ "api": [
   },
   {
     "type": "delete",
+    "url": "/geoparks/geosites/attractions/:id",
+    "title": "19.Deletar Atrações",
+    "version": "1.0.0",
+    "group": "Web",
+    "description": "<p>Permite que o usuário administrador delete os dados das atrações, a partir do id referente do mesmo. Essa exclusão não destroi o registro apenas ativa uma flag de exclusão permitindo a recuperação das informações e também não comprometendo os dados das pesquisas.</p>",
+    "parameter": {
+      "fields": {
+        "Params": [
+          {
+            "group": "Params",
+            "optional": false,
+            "field": "id",
+            "description": "<p>ID da atração no qual se deseja excluir os dados</p>"
+          }
+        ],
+        "Nível de Acesso": [
+          {
+            "group": "Nível de Acesso",
+            "type": "Object",
+            "optional": false,
+            "field": "user_type",
+            "description": "<p>O nível de permissão que o usuário precisa para ter acesso as informações dessa rota</p>"
+          },
+          {
+            "group": "Nível de Acesso",
+            "type": "Integer",
+            "optional": false,
+            "field": "user_type.id",
+            "description": "<p>1</p>"
+          },
+          {
+            "group": "Nível de Acesso",
+            "type": "String",
+            "optional": false,
+            "field": "user_type.type",
+            "description": "<p>&quot;Administrator&quot;</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "204": [
+          {
+            "group": "204",
+            "type": "<ul> <li></li> </ul>",
+            "optional": false,
+            "field": "-",
+            "description": "<p>Resultado da requisição positiva sem conteúdo na resposta</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Parâmentro Inválido - Error-Response:",
+          "content": "HTTP/1.1 400 Error\n{\n    \"error\": \"URL params validation fail.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Atração Inválida - Error-Response:",
+          "content": "HTTP/1.1 400 Error\n{\n    \"error\": \"Invalid Attraction.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "doc/version_1_0_0/web.js",
+    "groupTitle": "Web",
+    "name": "DeleteGeoparksGeositesAttractionsId",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Token necessário para a realização de autenticação</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header:",
+          "content": "{\n  \"authorization\": \"Bearer [token]\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "delete",
     "url": "/geoparks/geosites/:id",
     "title": "15.Deletar geossítios",
     "version": "1.0.0",
@@ -1355,6 +1448,127 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "/geoparks/geosites/:id_geosite/attractions",
+    "title": "16.Listar atrações de um geossítio",
+    "version": "1.0.0",
+    "group": "Web",
+    "description": "<p>Permite que o usuário administrador recupere as informaçãoes das atrações de um geossítio a partir de seu id em específico.</p>",
+    "parameter": {
+      "fields": {
+        "Params": [
+          {
+            "group": "Params",
+            "optional": false,
+            "field": "id",
+            "description": "<p>ID do geossítio.</p>"
+          }
+        ],
+        "Nível de Acesso": [
+          {
+            "group": "Nível de Acesso",
+            "type": "Object",
+            "optional": false,
+            "field": "user_type",
+            "description": "<p>O nível de permissão que o usuário precisa para ter acesso as informações dessa rota</p>"
+          },
+          {
+            "group": "Nível de Acesso",
+            "type": "Integer",
+            "optional": false,
+            "field": "user_type.id",
+            "description": "<p>1</p>"
+          },
+          {
+            "group": "Nível de Acesso",
+            "type": "String",
+            "optional": false,
+            "field": "user_type.type",
+            "description": "<p>&quot;Administrator&quot;</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Id da atração</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Nome da atração</p>"
+          },
+          {
+            "group": "200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "hidden",
+            "description": "<p>Flag que representa se a atração foi excluído ou não</p>"
+          },
+          {
+            "group": "200",
+            "type": "Date",
+            "optional": false,
+            "field": "createdAt",
+            "description": "<p>Data da criação do elemento</p>"
+          },
+          {
+            "group": "200",
+            "type": "Date",
+            "optional": false,
+            "field": "updatedAt",
+            "description": "<p>Data da ultima atualização nesse objeto</p>"
+          },
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "id_geosite",
+            "description": "<p>Id do geossítio no qual a atração pertence.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n [\n     {\n         \"id\": 1,\n         \"name\": \"Chapel of the Holy Sepulcher\",\n         \"hidden\": false,\n         \"createdAt\": \"2020-04-28T22:53:51.169Z\",\n         \"updatedAt\": \"2020-04-28T22:53:51.169Z\",\n         \"id_geopark\": 1\n     }\n ]",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "doc/version_1_0_0/web.js",
+    "groupTitle": "Web",
+    "name": "GetGeoparksGeositesId_geositeAttractions",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Token necessário para a realização de autenticação</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header:",
+          "content": "{\n  \"authorization\": \"Bearer [token]\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
     "url": "/geoparks/:id_geopark/geosites",
     "title": "11.Listar todos os geossítios",
     "version": "1.0.0",
@@ -1783,6 +1997,158 @@ define({ "api": [
     "filename": "doc/version_1_0_0/web.js",
     "groupTitle": "Web",
     "name": "PostGeoparks",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Token necessário para a realização de autenticação</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header:",
+          "content": "{\n  \"authorization\": \"Bearer [token]\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "post",
+    "url": "/geoparks/geosites/:id_geosite/attractions",
+    "title": "17.Criar uma atração",
+    "version": "1.0.0",
+    "group": "Web",
+    "description": "<p>Permite que o usuário administrador cadastre novas atrações para um geossítio apartir do seu id.</p>",
+    "parameter": {
+      "fields": {
+        "Params": [
+          {
+            "group": "Params",
+            "type": "Integer",
+            "optional": false,
+            "field": "id_geopark",
+            "description": "<p>ID do geoparque no qual o novo geossítio pertencerá</p>"
+          }
+        ],
+        "Body": [
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Nome da atração</p>"
+          }
+        ],
+        "Nível de Acesso": [
+          {
+            "group": "Nível de Acesso",
+            "type": "Object",
+            "optional": false,
+            "field": "user_type",
+            "description": "<p>O nível de permissão que o usuário precisa para ter acesso as informações dessa rota</p>"
+          },
+          {
+            "group": "Nível de Acesso",
+            "type": "Integer",
+            "optional": false,
+            "field": "user_type.id",
+            "description": "<p>1</p>"
+          },
+          {
+            "group": "Nível de Acesso",
+            "type": "String",
+            "optional": false,
+            "field": "user_type.type",
+            "description": "<p>&quot;Administrator&quot;</p>"
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Exemplo de requisição:",
+        "content": "{\n    \"name\": \"New Chapel of the Holy Sepulcher\"\n}",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "201": [
+          {
+            "group": "201",
+            "type": "Integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Id da atração</p>"
+          },
+          {
+            "group": "201",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Nome da atração</p>"
+          },
+          {
+            "group": "201",
+            "type": "Boolean",
+            "optional": false,
+            "field": "hidden",
+            "description": "<p>Flag que representa se uma atração foi excluído ou não</p>"
+          },
+          {
+            "group": "201",
+            "type": "Date",
+            "optional": false,
+            "field": "createdAt",
+            "description": "<p>Data da criação do elemento</p>"
+          },
+          {
+            "group": "201",
+            "type": "Date",
+            "optional": false,
+            "field": "updatedAt",
+            "description": "<p>Data da ultima atualização nesse objeto</p>"
+          },
+          {
+            "group": "201",
+            "type": "Integer",
+            "optional": false,
+            "field": "id_geosite",
+            "description": "<p>Id do geossítio no qual a atração pertence.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 201 OK\n {\n     \"id\": 39,\n     \"name\": \"New Chapel of the Holy Sepulcher\",\n     \"hidden\": false,\n     \"createdAt\": \"2020-04-28T22:53:51.169Z\",\n     \"updatedAt\": \"2020-04-28T22:53:51.169Z\",\n     \"id_geopark\": 1\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Campos inválidos - Error-Response:",
+          "content": "HTTP/1.1 400 Error\n{\n    \"error\": \"Req body validation fail.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Parâmentros inválidos - Error-Response:",
+          "content": "HTTP/1.1 400 Error\n{\n    \"error\": \"URL params validation fail.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "doc/version_1_0_0/web.js",
+    "groupTitle": "Web",
+    "name": "PostGeoparksGeositesId_geositeAttractions",
     "header": {
       "fields": {
         "Header": [
@@ -2282,6 +2648,163 @@ define({ "api": [
     "filename": "doc/version_1_0_0/web.js",
     "groupTitle": "Web",
     "name": "PostWebsessions"
+  },
+  {
+    "type": "put",
+    "url": "/geoparks/geosites/attractions/:id",
+    "title": "18.Atualizar um atrações",
+    "version": "1.0.0",
+    "group": "Web",
+    "description": "<p>Permite que o usuário administrador atualize os dados de uma atração.</p>",
+    "parameter": {
+      "fields": {
+        "Params": [
+          {
+            "group": "Params",
+            "type": "Integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>ID da atração para a atualização</p>"
+          }
+        ],
+        "Body": [
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Novo nome da atração</p>"
+          }
+        ],
+        "Nível de Acesso": [
+          {
+            "group": "Nível de Acesso",
+            "type": "Object",
+            "optional": false,
+            "field": "user_type",
+            "description": "<p>O nível de permissão que o usuário precisa para ter acesso as informações dessa rota</p>"
+          },
+          {
+            "group": "Nível de Acesso",
+            "type": "Integer",
+            "optional": false,
+            "field": "user_type.id",
+            "description": "<p>1</p>"
+          },
+          {
+            "group": "Nível de Acesso",
+            "type": "String",
+            "optional": false,
+            "field": "user_type.type",
+            "description": "<p>&quot;Administrator&quot;</p>"
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Exemplo de requisição:",
+        "content": "{\n    \"name\": \"Old Chapel of the Holy Sepulcher\"\n}",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Id da atração</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Nome da atração</p>"
+          },
+          {
+            "group": "200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "hidden",
+            "description": "<p>Flag que representa se uma atração foi excluído ou não</p>"
+          },
+          {
+            "group": "200",
+            "type": "Date",
+            "optional": false,
+            "field": "createdAt",
+            "description": "<p>Data da criação do elemento</p>"
+          },
+          {
+            "group": "200",
+            "type": "Date",
+            "optional": false,
+            "field": "updatedAt",
+            "description": "<p>Data da ultima atualização nesse objeto</p>"
+          },
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "id_geosite",
+            "description": "<p>Id do geossítio no qual a atração pertence.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n {\n     \"id\": 39,\n     \"name\": \"Old Chapel of the Holy Sepulcher\",\n     \"hidden\": false,\n     \"createdAt\": \"2020-04-28T22:53:51.169Z\",\n     \"updatedAt\": \"2020-04-28T22:53:51.169Z\",\n     \"id_geopark\": 1\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Campos inválidos - Error-Response:",
+          "content": "HTTP/1.1 400 Error\n{\n    \"error\": \"Invalid fields.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Parâmentros inválidos - Error-Response:",
+          "content": "HTTP/1.1 400 Error\n{\n    \"error\": \"URL params validation fail.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Atração Inválido - Error-Response:",
+          "content": "HTTP/1.1 400 Error\n{\n    \"error\": \"Attraction does not exist.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "doc/version_1_0_0/web.js",
+    "groupTitle": "Web",
+    "name": "PutGeoparksGeositesAttractionsId",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Token necessário para a realização de autenticação</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header:",
+          "content": "{\n  \"authorization\": \"Bearer [token]\"\n}",
+          "type": "json"
+        }
+      ]
+    }
   },
   {
     "type": "put",
