@@ -1711,6 +1711,105 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "/solicitations",
+    "title": "20.Listar solicitações",
+    "version": "1.0.0",
+    "group": "Web",
+    "description": "<p>Permite que o usuário administrador liste todas as solicitações de pesquisa.</p>",
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Id da solicitação</p>"
+          },
+          {
+            "group": "200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "status",
+            "description": "<p>Flag que representa se a solicitação está concluída ou não</p>"
+          },
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "id_geosite",
+            "description": "<p>Id do geossítio no qual será feita a pesquisa</p>"
+          },
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "id_researcher",
+            "description": "<p>Id do pesquisador responsável por realizar a pesquisa</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n [\n     {\n         \"id\": 2,\n         \"status\": false,\n         \"id_geosite\": 2\n         \"id_researcher\": 3\n     }\n ]",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "doc/version_1_0_0/web.js",
+    "groupTitle": "Web",
+    "name": "GetSolicitations",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Token necessário para a realização de autenticação</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header:",
+          "content": "{\n  \"authorization\": \"Bearer [token]\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Nível de Acesso": [
+          {
+            "group": "Nível de Acesso",
+            "type": "Object",
+            "optional": false,
+            "field": "user_type",
+            "description": "<p>O nível de permissão que o usuário precisa para ter acesso as informações dessa rota</p>"
+          },
+          {
+            "group": "Nível de Acesso",
+            "type": "Integer",
+            "optional": false,
+            "field": "user_type.id",
+            "description": "<p>1</p>"
+          },
+          {
+            "group": "Nível de Acesso",
+            "type": "String",
+            "optional": false,
+            "field": "user_type.type",
+            "description": "<p>&quot;Administrator&quot;</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "get",
     "url": "/users",
     "title": "02.Listar os usuários",
     "version": "1.0.0",
@@ -2359,6 +2458,170 @@ define({ "api": [
   },
   {
     "type": "post",
+    "url": "/solicitations",
+    "title": "21.Criar uma solicitação",
+    "version": "1.0.0",
+    "group": "Web",
+    "description": "<p>Permite que o usuário administrador crie uma nova solicitação passando o id do geossítio à ser pesquisado e o id do pesquisador responsável por realizar. Essa rota também é responsável por criar relatórios anuais de geossítio, fechar e atualizar, os em abertos, de acordo, com a data em que essa saolicitação está sendo criada.</p>",
+    "parameter": {
+      "fields": {
+        "Body": [
+          {
+            "group": "Body",
+            "type": "Integer",
+            "optional": false,
+            "field": "id_researcher",
+            "description": "<p>Id do pesquisador responsável por efetuar a pesquisa</p>"
+          },
+          {
+            "group": "Body",
+            "type": "Integer",
+            "optional": false,
+            "field": "id_geosite",
+            "description": "<p>Id do geossítio em será realizada a pesquisa</p>"
+          }
+        ],
+        "Nível de Acesso": [
+          {
+            "group": "Nível de Acesso",
+            "type": "Object",
+            "optional": false,
+            "field": "user_type",
+            "description": "<p>O nível de permissão que o usuário precisa para ter acesso as informações dessa rota</p>"
+          },
+          {
+            "group": "Nível de Acesso",
+            "type": "Integer",
+            "optional": false,
+            "field": "user_type.id",
+            "description": "<p>1</p>"
+          },
+          {
+            "group": "Nível de Acesso",
+            "type": "String",
+            "optional": false,
+            "field": "user_type.type",
+            "description": "<p>&quot;Administrator&quot;</p>"
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Exemplo de requisição:",
+        "content": "{\n  \"id_researcher\": 7,\n  \"id_geosite\": 4\n}",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "201": [
+          {
+            "group": "201",
+            "type": "Integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Id da solicitação</p>"
+          },
+          {
+            "group": "201",
+            "type": "Integer",
+            "optional": false,
+            "field": "id_geosite",
+            "description": "<p>Id do geossítio no qual será feita a pesquisa</p>"
+          },
+          {
+            "group": "201",
+            "type": "Integer",
+            "optional": false,
+            "field": "id_researcher",
+            "description": "<p>Id do pesquisador responsável por realizar a pesquisa</p>"
+          },
+          {
+            "group": "201",
+            "type": "Integer",
+            "optional": false,
+            "field": "id_adm",
+            "description": "<p>Id do administrador que gerou essa solicitação</p>"
+          },
+          {
+            "group": "201",
+            "type": "Date",
+            "optional": false,
+            "field": "createdAt",
+            "description": "<p>Data da criação do elemento</p>"
+          },
+          {
+            "group": "201",
+            "type": "Date",
+            "optional": false,
+            "field": "updatedAt",
+            "description": "<p>Data da ultima atualização nesse objeto</p>"
+          },
+          {
+            "group": "201",
+            "type": "Boolean",
+            "optional": false,
+            "field": "status",
+            "description": "<p>Flag que representa se a solicitação está concluída ou não</p>"
+          },
+          {
+            "group": "201",
+            "type": "Date",
+            "optional": false,
+            "field": "date",
+            "description": "<p>Data na qual a solicitação foi concluída.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 201 OK\n {\n     \"id\": 6,\n     \"id_researcher\": 7,\n     \"id_geosite\": 5,\n     \"id_adm\": 1,\n     \"updatedAt\": \"2020-09-14T19:33:56.453Z\",\n     \"createdAt\": \"2020-09-14T19:33:56.453Z\",\n     \"status\": false,\n     \"date\": null\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Campos inválidos - Error-Response:",
+          "content": "HTTP/1.1 400 Error\n{\n    \"error\": \"Validation failed.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Criação de uma solicitação de um geossítio que já tem uma aberta - Error-Response:",
+          "content": "HTTP/1.1 400 Error\n{\n    \"error\": \"Already exists a solicitation open.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "doc/version_1_0_0/web.js",
+    "groupTitle": "Web",
+    "name": "PostSolicitations",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Token necessário para a realização de autenticação</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header:",
+          "content": "{\n  \"authorization\": \"Bearer [token]\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "post",
     "url": "/users",
     "title": "03.Criar um usuário",
     "version": "1.0.0",
@@ -2652,7 +2915,7 @@ define({ "api": [
   {
     "type": "put",
     "url": "/geoparks/geosites/attractions/:id",
-    "title": "18.Atualizar um atrações",
+    "title": "18.Atualizar uma atração",
     "version": "1.0.0",
     "group": "Web",
     "description": "<p>Permite que o usuário administrador atualize os dados de uma atração.</p>",
@@ -3164,6 +3427,172 @@ define({ "api": [
     "filename": "doc/version_1_0_0/web.js",
     "groupTitle": "Web",
     "name": "PutGeoparksId",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Token necessário para a realização de autenticação</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header:",
+          "content": "{\n  \"authorization\": \"Bearer [token]\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "put",
+    "url": "/solicitations/:id",
+    "title": "22.Atualizar uma solicitação",
+    "version": "1.0.0",
+    "group": "Web",
+    "description": "<p>Permite que o usuário administrador atualize o pesquisador responsável da solicitação.</p>",
+    "parameter": {
+      "fields": {
+        "Params": [
+          {
+            "group": "Params",
+            "type": "Integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>ID da solicitação para a atualização</p>"
+          }
+        ],
+        "Body": [
+          {
+            "group": "Body",
+            "type": "Integer",
+            "optional": false,
+            "field": "id_researcher",
+            "description": "<p>Id do novo pesquisador</p>"
+          }
+        ],
+        "Nível de Acesso": [
+          {
+            "group": "Nível de Acesso",
+            "type": "Object",
+            "optional": false,
+            "field": "user_type",
+            "description": "<p>O nível de permissão que o usuário precisa para ter acesso as informações dessa rota</p>"
+          },
+          {
+            "group": "Nível de Acesso",
+            "type": "Integer",
+            "optional": false,
+            "field": "user_type.id",
+            "description": "<p>1</p>"
+          },
+          {
+            "group": "Nível de Acesso",
+            "type": "String",
+            "optional": false,
+            "field": "user_type.type",
+            "description": "<p>&quot;Administrator&quot;</p>"
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Exemplo de requisição:",
+        "content": "{\n    \"id_researcher\": 7\n}",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Id da solicitação</p>"
+          },
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "id_geosite",
+            "description": "<p>Id do geossítio no qual será feita a pesquisa</p>"
+          },
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "id_researcher",
+            "description": "<p>Id do pesquisador responsável por realizar a pesquisa</p>"
+          },
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "id_adm",
+            "description": "<p>Id do administrador que gerou essa solicitação</p>"
+          },
+          {
+            "group": "200",
+            "type": "Date",
+            "optional": false,
+            "field": "createdAt",
+            "description": "<p>Data da criação do elemento</p>"
+          },
+          {
+            "group": "200",
+            "type": "Date",
+            "optional": false,
+            "field": "updatedAt",
+            "description": "<p>Data da ultima atualização nesse objeto</p>"
+          },
+          {
+            "group": "200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "status",
+            "description": "<p>Flag que representa se a solicitação está concluída ou não</p>"
+          },
+          {
+            "group": "200",
+            "type": "Date",
+            "optional": false,
+            "field": "date",
+            "description": "<p>Data na qual a solicitação foi concluída.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 201 OK\n {\n     \"id\": 6,\n     \"id_researcher\": 7,\n     \"id_geosite\": 5,\n     \"id_adm\": 1,\n     \"updatedAt\": \"2020-09-14T19:33:56.453Z\",\n     \"createdAt\": \"2020-09-14T19:33:56.453Z\",\n     \"status\": false,\n     \"date\": null\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Campos inválidos - Error-Response:",
+          "content": "HTTP/1.1 400 Error\n{\n    \"error\": \"Invalid body Validation.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Parâmentros inválidos - Error-Response:",
+          "content": "HTTP/1.1 400 Error\n{\n    \"error\": \"Invalid params Validation.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "doc/version_1_0_0/web.js",
+    "groupTitle": "Web",
+    "name": "PutSolicitationsId",
     "header": {
       "fields": {
         "Header": [
