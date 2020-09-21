@@ -1711,6 +1711,467 @@
   },
   {
     "type": "get",
+    "url": "/reports/final/geopark/closed/id_report",
+    "title": "25.Lista o relatório fechado de um geoparque",
+    "version": "1.0.0",
+    "group": "Web",
+    "description": "<p>Permite que o usuário administrador liste os relatórios dos geossítios, mais recentes, referente ao id do relatório final de um geoparque. Esses relatórios mais recentes dos geossítios são os que foram considerados para finalizar o relatório final.</p>",
+    "parameter": {
+      "fields": {
+        "Params": [
+          {
+            "group": "Params",
+            "type": "Integer",
+            "optional": false,
+            "field": "id_report",
+            "description": "<p>ID do relatório final do geoparque para especificar de qual os relatórios dos geossítios devem ser recuperados.</p>"
+          }
+        ],
+        "Nível de Acesso": [
+          {
+            "group": "Nível de Acesso",
+            "type": "Object",
+            "optional": false,
+            "field": "user_type",
+            "description": "<p>O nível de permissão que o usuário precisa para ter acesso as informações dessa rota</p>"
+          },
+          {
+            "group": "Nível de Acesso",
+            "type": "Integer",
+            "optional": false,
+            "field": "user_type.id",
+            "description": "<p>1</p>"
+          },
+          {
+            "group": "Nível de Acesso",
+            "type": "String",
+            "optional": false,
+            "field": "user_type.type",
+            "description": "<p>&quot;Administrator&quot;</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Id do relatório do geossítio</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "geosite",
+            "description": "<p>Nome do geossitio</p>"
+          },
+          {
+            "group": "200",
+            "type": "Double",
+            "optional": false,
+            "field": "demand",
+            "description": "<p>Dados finais de demanda do geossítio de acordo com suas atrações</p>"
+          },
+          {
+            "group": "200",
+            "type": "Double",
+            "optional": false,
+            "field": "management",
+            "description": "<p>Dados finais de gerenciamento do geossítio de acordo com suas atrações</p>"
+          },
+          {
+            "group": "200",
+            "type": "Double",
+            "optional": false,
+            "field": "zone",
+            "description": "<p>Dados finais de zona do geossítio de acordo com suas atrações</p>"
+          },
+          {
+            "group": "200",
+            "type": "Double",
+            "optional": false,
+            "field": "impact",
+            "description": "<p>Dados finais de impacto do geossítio de acordo com suas atrações</p>"
+          },
+          {
+            "group": "200",
+            "type": "Double",
+            "optional": false,
+            "field": "priorityManagement",
+            "description": "<p>Prioridade de gerenciamento do geossítio, valor calculado a partir da equação da pesquisa</p>"
+          },
+          {
+            "group": "200",
+            "type": "Date",
+            "optional": false,
+            "field": "date",
+            "description": "<p>Data na qual a pesquisa foi concluída.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n [\n     {\n         \"id\": 1,\n         \"geosite\": \"Colina do Horto\",\n         \"demand\": 2.9,\n         \"management\": 1,\n         \"zone\": 1,\n         \"impact\": 1.1,\n         \"priorityManagement\": 4.1,\n         \"date\": \"2020-09-15T15:55:10.307Z\"\n     },\n     {\n         \"id\": 2,\n         \"geosite\": \"Cachoeira de Missão Velha\",\n         \"demand\": 1,\n         \"management\": 2,\n         \"zone\": 3,\n         \"impact\": 2.5,\n         \"priorityManagement\": 9.6,\n         \"date\": \"2020-09-15T15:55:10.307Z\"\n     },\n     ...\n ]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Parâmentros inválidos - Error-Response:",
+          "content": "HTTP/1.1 400 Error\n{\n    \"error\": \"URL params validation fail.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Geopark Inválido - Error-Response:",
+          "content": "HTTP/1.1 400 Error\n{\n    \"error\": \"Geopark does not exist.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "doc/version_1_0_0/web.js",
+    "groupTitle": "Web",
+    "name": "GetReportsFinalGeoparkClosedId_report",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Token necessário para a realização de autenticação</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header:",
+          "content": "{\n  \"authorization\": \"Bearer [token]\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/reports/final/geopark/:id_geopark",
+    "title": "23.Listar todos relatórios de um geoparque",
+    "version": "1.0.0",
+    "group": "Web",
+    "description": "<p>Permite que o usuário administrador liste todas os relatórios finais realizados em um geoparque trazendo apenas as informações dos atributos.</p>",
+    "parameter": {
+      "fields": {
+        "Params": [
+          {
+            "group": "Params",
+            "type": "Integer",
+            "optional": false,
+            "field": "id_geopark",
+            "description": "<p>ID do geopark para especificar de qual os relatórios devem ser recuperados.</p>"
+          }
+        ],
+        "Nível de Acesso": [
+          {
+            "group": "Nível de Acesso",
+            "type": "Object",
+            "optional": false,
+            "field": "user_type",
+            "description": "<p>O nível de permissão que o usuário precisa para ter acesso as informações dessa rota</p>"
+          },
+          {
+            "group": "Nível de Acesso",
+            "type": "Integer",
+            "optional": false,
+            "field": "user_type.id",
+            "description": "<p>1</p>"
+          },
+          {
+            "group": "Nível de Acesso",
+            "type": "String",
+            "optional": false,
+            "field": "user_type.type",
+            "description": "<p>&quot;Administrator&quot;</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Id do relatório final do geoparque</p>"
+          },
+          {
+            "group": "200",
+            "type": "Double",
+            "optional": false,
+            "field": "demand",
+            "description": "<p>Dados finais de demanda do geopark</p>"
+          },
+          {
+            "group": "200",
+            "type": "Double",
+            "optional": false,
+            "field": "management",
+            "description": "<p>Dados finais de gerenciamento do geopark</p>"
+          },
+          {
+            "group": "200",
+            "type": "Double",
+            "optional": false,
+            "field": "zone",
+            "description": "<p>Dados finais de zona do geopark</p>"
+          },
+          {
+            "group": "200",
+            "type": "Double",
+            "optional": false,
+            "field": "impact",
+            "description": "<p>Dados finais de impacto do geopark</p>"
+          },
+          {
+            "group": "200",
+            "type": "Double",
+            "optional": false,
+            "field": "priorityManagement",
+            "description": "<p>Prioridade de gerenciamento do geossítio, valor calculado a partir da equação da pesquisa</p>"
+          },
+          {
+            "group": "200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "status",
+            "description": "<p>Flag que representa se a pesquisa já foi concluída, em outras palavras, se é dinâmica ou fechada.</p>"
+          },
+          {
+            "group": "200",
+            "type": "Date",
+            "optional": false,
+            "field": "date",
+            "description": "<p>Data na qual a pesquisa foi concluída.</p>"
+          },
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "id_geopark",
+            "description": "<p>Id do geopark da pesquisa</p>"
+          }
+        ],
+        "201": [
+          {
+            "group": "201",
+            "type": "Date",
+            "optional": false,
+            "field": "createdAt",
+            "description": "<p>Data da criação do elemento</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n [\n     {\n         \"id\": 1,\n         \"demand\": 1.7,\n         \"management\": 1.9,\n         \"zone\": 1.9,\n         \"impact\": 1.6,\n         \"priorityManagement\": 6.8,\n         \"status\": true,\n         \"date\": \"2019-09-15T16:02:22.669Z\",\n         \"created_at\": \"2019-09-15T15:54:12.880Z\",\n         \"id_geopark\": 1\n     }\n ]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Parâmentros inválidos - Error-Response:",
+          "content": "HTTP/1.1 400 Error\n{\n    \"error\": \"URL params validation fail.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Geopark Inválido - Error-Response:",
+          "content": "HTTP/1.1 400 Error\n{\n    \"error\": \"Geopark does not exist.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "doc/version_1_0_0/web.js",
+    "groupTitle": "Web",
+    "name": "GetReportsFinalGeoparkId_geopark",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Token necessário para a realização de autenticação</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header:",
+          "content": "{\n  \"authorization\": \"Bearer [token]\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/reports/final/geopark/:id_geopark/dinamic",
+    "title": "24.Lista o relatório dinâmico de um geoparque",
+    "version": "1.0.0",
+    "group": "Web",
+    "description": "<p>Permite que o usuário administrador liste os relatórios mais recentes de cada geossítio para gerar o relatório do dinâmico geoparque, em outras palavras, o relatório do ano daquele geoparque levando em consideração que ele ainda não foi fechado.</p>",
+    "parameter": {
+      "fields": {
+        "Params": [
+          {
+            "group": "Params",
+            "type": "Integer",
+            "optional": false,
+            "field": "id_geopark",
+            "description": "<p>ID do geopark para especificar de qual geoparque os relatórios dos devem ser recuperados.</p>"
+          }
+        ],
+        "Nível de Acesso": [
+          {
+            "group": "Nível de Acesso",
+            "type": "Object",
+            "optional": false,
+            "field": "user_type",
+            "description": "<p>O nível de permissão que o usuário precisa para ter acesso as informações dessa rota</p>"
+          },
+          {
+            "group": "Nível de Acesso",
+            "type": "Integer",
+            "optional": false,
+            "field": "user_type.id",
+            "description": "<p>1</p>"
+          },
+          {
+            "group": "Nível de Acesso",
+            "type": "String",
+            "optional": false,
+            "field": "user_type.type",
+            "description": "<p>&quot;Administrator&quot;</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Id do relatório do geossítio</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "geosite",
+            "description": "<p>Nome do geossitio</p>"
+          },
+          {
+            "group": "200",
+            "type": "Double",
+            "optional": false,
+            "field": "demand",
+            "description": "<p>Dados finais de demanda do geossítio de acordo com suas atrações</p>"
+          },
+          {
+            "group": "200",
+            "type": "Double",
+            "optional": false,
+            "field": "management",
+            "description": "<p>Dados finais de gerenciamento do geossítio de acordo com suas atrações</p>"
+          },
+          {
+            "group": "200",
+            "type": "Double",
+            "optional": false,
+            "field": "zone",
+            "description": "<p>Dados finais de zona do geossítio de acordo com suas atrações</p>"
+          },
+          {
+            "group": "200",
+            "type": "Double",
+            "optional": false,
+            "field": "impact",
+            "description": "<p>Dados finais de impacto do geossítio de acordo com suas atrações</p>"
+          },
+          {
+            "group": "200",
+            "type": "Double",
+            "optional": false,
+            "field": "priorityManagement",
+            "description": "<p>Prioridade de gerenciamento do geossítio, valor calculado a partir da equação da pesquisa</p>"
+          },
+          {
+            "group": "200",
+            "type": "Date",
+            "optional": false,
+            "field": "date",
+            "description": "<p>Data na qual a pesquisa foi concluída.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n [\n     {\n         \"id\": 1,\n         \"geosite\": \"Colina do Horto\",\n         \"demand\": 2.9,\n         \"management\": 1,\n         \"zone\": 1,\n         \"impact\": 1.1,\n         \"priorityManagement\": 4.1,\n         \"date\": \"2020-09-15T15:55:10.307Z\"\n     },\n     {\n         \"id\": 2,\n         \"geosite\": \"Cachoeira de Missão Velha\",\n         \"demand\": 1,\n         \"management\": 2,\n         \"zone\": 3,\n         \"impact\": 2.5,\n         \"priorityManagement\": 9.6,\n         \"date\": \"2020-09-15T15:55:10.307Z\"\n     },\n     ...\n ]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Id de um relatório aberto - Error-Response:",
+          "content": "HTTP/1.1 400 Error\n{\n    \"error\": \"This report is not closed.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "doc/version_1_0_0/web.js",
+    "groupTitle": "Web",
+    "name": "GetReportsFinalGeoparkId_geoparkDinamic",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Token necessário para a realização de autenticação</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header:",
+          "content": "{\n  \"authorization\": \"Bearer [token]\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
     "url": "/solicitations",
     "title": "20.Listar solicitações",
     "version": "1.0.0",
@@ -2462,7 +2923,7 @@
     "title": "21.Criar uma solicitação",
     "version": "1.0.0",
     "group": "Web",
-    "description": "<p>Permite que o usuário administrador crie uma nova solicitação passando o id do geossítio à ser pesquisado e o id do pesquisador responsável por realizar. Essa rota também é responsável por criar relatórios anuais de geossítio, fechar e atualizar, os em abertos, de acordo, com a data em que essa saolicitação está sendo criada.</p>",
+    "description": "<p>Permite que o usuário administrador crie uma nova solicitação passando o id do geossítio à ser pesquisado e o id do pesquisador responsável por realizar. Essa rota também é responsável por criar relatórios anuais de geossítio, fechar e atualizar, os em abertos, de acordo, com a data em que essa solicitação está sendo criada.</p>",
     "parameter": {
       "fields": {
         "Body": [
