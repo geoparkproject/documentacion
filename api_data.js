@@ -2081,6 +2081,226 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "/reports/attractions/:id_attraction_report/grades_images",
+    "title": "30.Visualiza as notas e as imagens de acordo com id de um relatório de uma atração",
+    "version": "1.0.0",
+    "group": "Web",
+    "description": "<p>Permite que o usuário administrador exiba cada nota de cada atributo de um relatório de atração e também as informações das imagens à elas associadas, caso exista.</p>",
+    "parameter": {
+      "fields": {
+        "Params": [
+          {
+            "group": "Params",
+            "type": "Integer",
+            "optional": false,
+            "field": "id_attraction_report",
+            "description": "<p>ID de um relatório de atração.</p>"
+          }
+        ],
+        "Nível de Acesso": [
+          {
+            "group": "Nível de Acesso",
+            "type": "Object",
+            "optional": false,
+            "field": "user_type",
+            "description": "<p>O nível de permissão que o usuário precisa para ter acesso as informações dessa rota</p>"
+          },
+          {
+            "group": "Nível de Acesso",
+            "type": "Integer",
+            "optional": false,
+            "field": "user_type.id",
+            "description": "<p>1</p>"
+          },
+          {
+            "group": "Nível de Acesso",
+            "type": "String",
+            "optional": false,
+            "field": "user_type.type",
+            "description": "<p>&quot;Administrator&quot;</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "Array",
+            "optional": false,
+            "field": "grades",
+            "description": "<p>Array de objetos contendo as informções das notas de cada atributo do relatório da atração</p>"
+          },
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "grades.id",
+            "description": "<p>Id do objeto que representa a nota com seu atributo e outros valores.</p>"
+          },
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "grades.grade",
+            "description": "<p>A nota atribuida naquele atributo, da pesquisa em questão.</p>"
+          },
+          {
+            "group": "200",
+            "type": "Date",
+            "optional": false,
+            "field": "grades.createdAt",
+            "description": "<p>Data da criação do elemento</p>"
+          },
+          {
+            "group": "200",
+            "type": "Date",
+            "optional": false,
+            "field": "grades.updatedAt",
+            "description": "<p>Data da ultima atualização nesse objeto</p>"
+          },
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "grades.id_attraction_report",
+            "description": "<p>Id do relatório da atração que essa nota está vinculada.</p>"
+          },
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "grades.id_attribute",
+            "description": "<p>Id que representa o atributo em questão</p>"
+          },
+          {
+            "group": "200",
+            "type": "Object",
+            "optional": false,
+            "field": "grades.Attribute",
+            "description": "<p>Objeto contendo a informação do atributo</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "grades.Attribute.name",
+            "description": "<p>Nome do atributo</p>"
+          },
+          {
+            "group": "200",
+            "type": "Array",
+            "optional": false,
+            "field": "images",
+            "description": "<p>Array contendo as informações da imagem e qual o atributo ela está vinculada</p>"
+          },
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "images.id",
+            "description": "<p>Id referente ao dados da imagem</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "images.url",
+            "description": "<p>Url de acesso da imagem</p>"
+          },
+          {
+            "group": "200",
+            "type": "Double",
+            "optional": false,
+            "field": "images.latitude",
+            "description": "<p>Valor de latitude onde a imagem foi capturada.</p>"
+          },
+          {
+            "group": "200",
+            "type": "Double",
+            "optional": false,
+            "field": "images.longitude",
+            "description": "<p>Valor de longitude onde a imagem foi capturada.</p>"
+          },
+          {
+            "group": "200",
+            "type": "Date",
+            "optional": false,
+            "field": "images.createdAt",
+            "description": "<p>Data da criação do elemento</p>"
+          },
+          {
+            "group": "200",
+            "type": "Date",
+            "optional": false,
+            "field": "images.updatedAt",
+            "description": "<p>Data da ultima atualização nesse objeto</p>"
+          },
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "images.id_ref_attribute",
+            "description": "<p>Id referente ao atributo que a imagem está vinculada</p>"
+          },
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "images.id_attraction_report",
+            "description": "<p>Id do relatório da atração que a imagem está vinculada.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n {\n     \"grades\": [\n         {\n           \"id\": 885,\n           \"grade\": 1,\n           \"createdAt\": \"2020-09-17T18:12:15.262Z\",\n           \"updatedAt\": \"2020-09-17T18:12:15.262Z\",\n           \"id_attraction_report\": 53,\n           \"id_attribute\": 1,\n           \"Attribute\": {\n             \"name\": \"demand\"\n           }\n         },\n         ...\n     ],\n     \"images\": [\n         {\n           \"id\": 1,\n           \"url\": \"/id_12/attraction_15/1600366335152_attribute-1.jpg\",\n           \"latitude\": 0.45484,\n           \"longitude\": 0.45484,\n           \"createdAt\": \"2020-09-17T18:12:15.256Z\",\n           \"updatedAt\": \"2020-09-17T18:12:15.256Z\",\n           \"id_ref_attribute\": 1,\n           \"id_attraction_report\": 53\n         },\n         ...  \n     ],\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Parâmentros inválidos - Error-Response:",
+          "content": "HTTP/1.1 400 Error\n{\n    \"error\": \"Invalid params.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Attraction Report Inválido - Error-Response:",
+          "content": "HTTP/1.1 400 Error\n{\n    \"error\": \"Attraction report does not exist.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "doc/version_1_0_0/web.js",
+    "groupTitle": "Web",
+    "name": "GetReportsAttractionsId_attraction_reportGrades_images",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Token necessário para a realização de autenticação</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header:",
+          "content": "{\n  \"authorization\": \"Bearer [token]\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
     "url": "/reports/final/geopark/closed/id_report",
     "title": "25.Lista o relatório fechado de um geoparque",
     "version": "1.0.0",
