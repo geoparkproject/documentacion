@@ -1711,6 +1711,376 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "/reports/attractions/geosite/:id_geosite",
+    "title": "28.Lista o todos os relatórios das atrações por meio do id de um geossítio",
+    "version": "1.0.0",
+    "group": "Web",
+    "description": "<p>Permite que o usuário administrador liste os relatórios das atrações que pertecem a um geossítio.</p>",
+    "parameter": {
+      "fields": {
+        "Params": [
+          {
+            "group": "Params",
+            "type": "Integer",
+            "optional": false,
+            "field": "id_geosite",
+            "description": "<p>ID de um geossítio para especificar quais são os relatórios de atrações serão obtidos.</p>"
+          }
+        ],
+        "Nível de Acesso": [
+          {
+            "group": "Nível de Acesso",
+            "type": "Object",
+            "optional": false,
+            "field": "user_type",
+            "description": "<p>O nível de permissão que o usuário precisa para ter acesso as informações dessa rota</p>"
+          },
+          {
+            "group": "Nível de Acesso",
+            "type": "Integer",
+            "optional": false,
+            "field": "user_type.id",
+            "description": "<p>1</p>"
+          },
+          {
+            "group": "Nível de Acesso",
+            "type": "String",
+            "optional": false,
+            "field": "user_type.type",
+            "description": "<p>&quot;Administrator&quot;</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Id do relatório da atração</p>"
+          },
+          {
+            "group": "200",
+            "type": "Double",
+            "optional": false,
+            "field": "demand",
+            "description": "<p>Valor de demanda atribuído aquela atração naquela pesquisa</p>"
+          },
+          {
+            "group": "200",
+            "type": "Double",
+            "optional": false,
+            "field": "zone",
+            "description": "<p>Valor de zona atribuído aquela atração naquela pesquisa</p>"
+          },
+          {
+            "group": "200",
+            "type": "Double",
+            "optional": false,
+            "field": "management",
+            "description": "<p>Valor de gerenciamento atribuído aquela atração naquela pesquisa</p>"
+          },
+          {
+            "group": "200",
+            "type": "Double",
+            "optional": false,
+            "field": "impact",
+            "description": "<p>Média dos valores atribuidos nos subtópicos de impactos atribuidos à atração naquela pesquisa</p>"
+          },
+          {
+            "group": "200",
+            "type": "Date",
+            "optional": false,
+            "field": "date",
+            "description": "<p>Data na qual a pesquisa foi concluída.</p>"
+          },
+          {
+            "group": "200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "status",
+            "description": "<p>Flag que representa se a pesquisa já foi concluída, em outras palavras, se é dinâmica ou fechada.</p>"
+          },
+          {
+            "group": "200",
+            "type": "Date",
+            "optional": false,
+            "field": "createdAt",
+            "description": "<p>Data da criação do elemento</p>"
+          },
+          {
+            "group": "200",
+            "type": "Date",
+            "optional": false,
+            "field": "updatedAt",
+            "description": "<p>Data da ultima atualização nesse objeto</p>"
+          },
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "id_geosite_report",
+            "description": "<p>Id do relatório do geossítio no qual esse relatório da atração está vinculado.</p>"
+          },
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "id_attraction",
+            "description": "<p>Id da atração</p>"
+          },
+          {
+            "group": "200",
+            "type": "Object",
+            "optional": false,
+            "field": "geosite_report",
+            "description": "<p>Objeto contendo informações básicas sobre o relatório do geossítio</p>"
+          },
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "geosite_report.id_final_report",
+            "description": "<p>Id do relatório final no qual esse relatório da atração está vinculado.</p>"
+          },
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "geosite_report.id_solicitation",
+            "description": "<p>Id da solicitação de pesquisa.</p>"
+          },
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "geosite_report.id_geosite",
+            "description": "<p>Id do geossítio a qual essa atração pertence.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n [\n     {\n         \"id\": 1,\n         \"demand\": 3,\n         \"zone\": 1,\n         \"management\": 1,\n         \"impact\": 1,\n         \"date\": \"2020-09-15T15:55:09.395Z\",\n         \"status\": true,\n         \"createdAt\": \"2020-09-15T15:55:09.395Z\",\n         \"updatedAt\": \"2020-09-15T15:55:09.395Z\",\n         \"id_geosite_report\": 1,\n         \"id_attraction\": 1,\n         \"geosite_report\": {\n           \"id_final_report\": 1,\n           \"id_solicitation\": 1,\n           \"id_geosite\": 1\n         }\n     },\n     ...\n ]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Parâmentros inválidos - Error-Response:",
+          "content": "HTTP/1.1 400 Error\n{\n    \"error\": \"Invalid params.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Geosite Inválido - Error-Response:",
+          "content": "HTTP/1.1 400 Error\n{\n    \"error\": \"Geosite does not exist.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "doc/version_1_0_0/web.js",
+    "groupTitle": "Web",
+    "name": "GetReportsAttractionsGeositeId_geosite",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Token necessário para a realização de autenticação</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header:",
+          "content": "{\n  \"authorization\": \"Bearer [token]\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/reports/attractions/:id_attraction_report",
+    "title": "29.Visualiza os dados de relatório de uma atração",
+    "version": "1.0.0",
+    "group": "Web",
+    "description": "<p>Permite que o usuário administrador exiba um relatório de atração pelo seu id.</p>",
+    "parameter": {
+      "fields": {
+        "Params": [
+          {
+            "group": "Params",
+            "type": "Integer",
+            "optional": false,
+            "field": "id_attraction_report",
+            "description": "<p>ID de um relatório de atração.</p>"
+          }
+        ],
+        "Nível de Acesso": [
+          {
+            "group": "Nível de Acesso",
+            "type": "Object",
+            "optional": false,
+            "field": "user_type",
+            "description": "<p>O nível de permissão que o usuário precisa para ter acesso as informações dessa rota</p>"
+          },
+          {
+            "group": "Nível de Acesso",
+            "type": "Integer",
+            "optional": false,
+            "field": "user_type.id",
+            "description": "<p>1</p>"
+          },
+          {
+            "group": "Nível de Acesso",
+            "type": "String",
+            "optional": false,
+            "field": "user_type.type",
+            "description": "<p>&quot;Administrator&quot;</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Id do relatório da atração</p>"
+          },
+          {
+            "group": "200",
+            "type": "Double",
+            "optional": false,
+            "field": "demand",
+            "description": "<p>Valor de demanda atribuído aquela atração naquela pesquisa</p>"
+          },
+          {
+            "group": "200",
+            "type": "Double",
+            "optional": false,
+            "field": "zone",
+            "description": "<p>Valor de zona atribuído aquela atração naquela pesquisa</p>"
+          },
+          {
+            "group": "200",
+            "type": "Double",
+            "optional": false,
+            "field": "management",
+            "description": "<p>Valor de gerenciamento atribuído aquela atração naquela pesquisa</p>"
+          },
+          {
+            "group": "200",
+            "type": "Double",
+            "optional": false,
+            "field": "impact",
+            "description": "<p>Média dos valores atribuidos nos subtópicos de impactos atribuidos à atração naquela pesquisa</p>"
+          },
+          {
+            "group": "200",
+            "type": "Date",
+            "optional": false,
+            "field": "date",
+            "description": "<p>Data na qual a pesquisa foi concluída.</p>"
+          },
+          {
+            "group": "200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "status",
+            "description": "<p>Flag que representa se a pesquisa já foi concluída, em outras palavras, se é dinâmica ou fechada.</p>"
+          },
+          {
+            "group": "200",
+            "type": "Date",
+            "optional": false,
+            "field": "createdAt",
+            "description": "<p>Data da criação do elemento</p>"
+          },
+          {
+            "group": "200",
+            "type": "Date",
+            "optional": false,
+            "field": "updatedAt",
+            "description": "<p>Data da ultima atualização nesse objeto</p>"
+          },
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "id_geosite_report",
+            "description": "<p>Id do relatório do geossítio no qual esse relatório da atração está vinculado.</p>"
+          },
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "id_attraction",
+            "description": "<p>Id da atração</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n {\n     \"id\": 39,\n     \"demand\": 3,\n     \"zone\": 1,\n     \"management\": 1,\n     \"impact\": 1,\n     \"date\": \"2020-09-17T18:09:50.765Z\",\n     \"status\": true,\n     \"createdAt\": \"2020-09-17T18:09:50.765Z\",\n     \"updatedAt\": \"2020-09-17T18:09:50.765Z\",\n     \"id_geosite_report\": 10,\n     \"id_attraction\": 1\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Parâmentros inválidos - Error-Response:",
+          "content": "HTTP/1.1 400 Error\n{\n    \"error\": \"Invalid params.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Attraction Report Inválido - Error-Response:",
+          "content": "HTTP/1.1 400 Error\n{\n    \"error\": \"Attraction report does not exist.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "doc/version_1_0_0/web.js",
+    "groupTitle": "Web",
+    "name": "GetReportsAttractionsId_attraction_report",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Token necessário para a realização de autenticação</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header:",
+          "content": "{\n  \"authorization\": \"Bearer [token]\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
     "url": "/reports/final/geopark/closed/id_report",
     "title": "25.Lista o relatório fechado de um geoparque",
     "version": "1.0.0",
@@ -1974,7 +2344,7 @@ define({ "api": [
             "group": "201",
             "type": "Date",
             "optional": false,
-            "field": "createdAt",
+            "field": "created_at",
             "description": "<p>Data da criação do elemento</p>"
           }
         ]
@@ -2149,6 +2519,327 @@ define({ "api": [
     "filename": "doc/version_1_0_0/web.js",
     "groupTitle": "Web",
     "name": "GetReportsFinalGeoparkId_geoparkDinamic",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Token necessário para a realização de autenticação</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header:",
+          "content": "{\n  \"authorization\": \"Bearer [token]\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/reports/geopark/:id_geopark/geosites",
+    "title": "26.Lista o todos os relatórios dos geossítios de um geoparque",
+    "version": "1.0.0",
+    "group": "Web",
+    "description": "<p>Permite que o usuário administrador liste os relatórios dos geossítios já feitos por meio de um id de um geopark.</p>",
+    "parameter": {
+      "fields": {
+        "Params": [
+          {
+            "group": "Params",
+            "type": "Integer",
+            "optional": false,
+            "field": "id_geopark",
+            "description": "<p>ID do geoparque para especificar de qual os relatórios dos geossítios devem ser recuperados.</p>"
+          }
+        ],
+        "Nível de Acesso": [
+          {
+            "group": "Nível de Acesso",
+            "type": "Object",
+            "optional": false,
+            "field": "user_type",
+            "description": "<p>O nível de permissão que o usuário precisa para ter acesso as informações dessa rota</p>"
+          },
+          {
+            "group": "Nível de Acesso",
+            "type": "Integer",
+            "optional": false,
+            "field": "user_type.id",
+            "description": "<p>1</p>"
+          },
+          {
+            "group": "Nível de Acesso",
+            "type": "String",
+            "optional": false,
+            "field": "user_type.type",
+            "description": "<p>&quot;Administrator&quot;</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Id do relatório do geossítio</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "geosite",
+            "description": "<p>Nome do geossitio</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "address",
+            "description": "<p>Endereço do geossítio contando com o nome da cidade e o Estado/Província/Região</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "researcher",
+            "description": "<p>Nome do pesquisador responsável por realizar a pesquisa</p>"
+          },
+          {
+            "group": "200",
+            "type": "Date",
+            "optional": false,
+            "field": "created_at",
+            "description": "<p>Data da criação do elemento</p>"
+          },
+          {
+            "group": "200",
+            "type": "Date",
+            "optional": false,
+            "field": "date",
+            "description": "<p>Data na qual a pesquisa foi concluída.</p>"
+          },
+          {
+            "group": "200",
+            "type": "Double",
+            "optional": false,
+            "field": "demand",
+            "description": "<p>Dados finais de demanda do geossítio de acordo com suas atrações</p>"
+          },
+          {
+            "group": "200",
+            "type": "Double",
+            "optional": false,
+            "field": "management",
+            "description": "<p>Dados finais de gerenciamento do geossítio de acordo com suas atrações</p>"
+          },
+          {
+            "group": "200",
+            "type": "Double",
+            "optional": false,
+            "field": "zone",
+            "description": "<p>Dados finais de zona do geossítio de acordo com suas atrações</p>"
+          },
+          {
+            "group": "200",
+            "type": "Double",
+            "optional": false,
+            "field": "impact",
+            "description": "<p>Dados finais de impacto do geossítio de acordo com suas atrações</p>"
+          },
+          {
+            "group": "200",
+            "type": "Double",
+            "optional": false,
+            "field": "priorityManagement",
+            "description": "<p>Prioridade de gerenciamento do geossítio, valor calculado a partir da equação da pesquisa</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n [\n     {\n         \"id_geosite_report\": 1,\n         \"geosite\": \"Colina do Horto\",\n         \"address\": \"Cidade - Ceará\",\n         \"researcher\": \"Júlio Cavalcanti Fernandes\",\n         \"created_at\": \"2020-09-15T15:54:12.927Z\",\n         \"date\": \"2020-09-15T15:55:10.307Z\",\n         \"demand\": 2.9,\n         \"management\": 1,\n         \"zone\": 1,\n         \"impact\": 1.1,\n         \"priorityManagement\": 4.1\n     },\n     ...\n ]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Parâmentros inválidos - Error-Response:",
+          "content": "HTTP/1.1 400 Error\n{\n    \"error\": \"Invalid params.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Geopark Inválido - Error-Response:",
+          "content": "HTTP/1.1 400 Error\n{\n    \"error\": \"Geopark does not exist.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "doc/version_1_0_0/web.js",
+    "groupTitle": "Web",
+    "name": "GetReportsGeoparkId_geoparkGeosites",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Token necessário para a realização de autenticação</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header:",
+          "content": "{\n  \"authorization\": \"Bearer [token]\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/reports/geosite/:id_geosite_report/attractions",
+    "title": "27.Lista o todos os relatórios das atrações por meio do id de um relatório de geossítio",
+    "version": "1.0.0",
+    "group": "Web",
+    "description": "<p>Permite que o usuário administrador liste os relatórios das atrações de um geossítio, essas relatórios são buscado de acordo com o id do relatório geral do geossítio.</p>",
+    "parameter": {
+      "fields": {
+        "Params": [
+          {
+            "group": "Params",
+            "type": "Integer",
+            "optional": false,
+            "field": "id_geosite_report",
+            "description": "<p>ID de um relatório específico de um geossítio para especificar quais são os relatórios das atrações que o geraram.</p>"
+          }
+        ],
+        "Nível de Acesso": [
+          {
+            "group": "Nível de Acesso",
+            "type": "Object",
+            "optional": false,
+            "field": "user_type",
+            "description": "<p>O nível de permissão que o usuário precisa para ter acesso as informações dessa rota</p>"
+          },
+          {
+            "group": "Nível de Acesso",
+            "type": "Integer",
+            "optional": false,
+            "field": "user_type.id",
+            "description": "<p>1</p>"
+          },
+          {
+            "group": "Nível de Acesso",
+            "type": "String",
+            "optional": false,
+            "field": "user_type.type",
+            "description": "<p>&quot;Administrator&quot;</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "Integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Id do relatório da atração</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "attraction",
+            "description": "<p>Nome da atração</p>"
+          },
+          {
+            "group": "200",
+            "type": "Double",
+            "optional": false,
+            "field": "demand",
+            "description": "<p>Valor de demanda atribuído aquela atração naquela pesquisa</p>"
+          },
+          {
+            "group": "200",
+            "type": "Double",
+            "optional": false,
+            "field": "zone",
+            "description": "<p>Valor de zona atribuído aquela atração naquela pesquisa</p>"
+          },
+          {
+            "group": "200",
+            "type": "Double",
+            "optional": false,
+            "field": "management",
+            "description": "<p>Valor de gerenciamento atribuído aquela atração naquela pesquisa</p>"
+          },
+          {
+            "group": "200",
+            "type": "Double",
+            "optional": false,
+            "field": "impact",
+            "description": "<p>Média dos valores atribuidos nos subtópicos de impactos atribuidos à atração naquela pesquisa</p>"
+          },
+          {
+            "group": "200",
+            "type": "Date",
+            "optional": false,
+            "field": "date",
+            "description": "<p>Data na qual a pesquisa foi concluída.</p>"
+          },
+          {
+            "group": "200",
+            "type": "Double",
+            "optional": false,
+            "field": "priorityManagement",
+            "description": "<p>Prioridade de gerenciamento da atração, valor calculado a partir da equação da pesquisa</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n [\n     {\n         \"id\": 1,\n         \"attraction\": \"Chapel of the Holy Sepulcher\",\n         \"demand\": 3,\n         \"zone\": 1,\n         \"management\": 1,\n         \"impact\": 1,\n         \"date\": \"2020-09-15T15:55:09.395Z\",\n         \"priorityManagement\": 4\n     },\n     ...\n ]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Parâmentros inválidos - Error-Response:",
+          "content": "HTTP/1.1 400 Error\n{\n    \"error\": \"Invalid params.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Geosite Report Inválido - Error-Response:",
+          "content": "HTTP/1.1 400 Error\n{\n    \"error\": \"Geosite report does not exist.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "doc/version_1_0_0/web.js",
+    "groupTitle": "Web",
+    "name": "GetReportsGeositeId_geosite_reportAttractions",
     "header": {
       "fields": {
         "Header": [
