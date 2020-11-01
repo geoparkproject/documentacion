@@ -253,7 +253,7 @@ define({ "api": [
     "examples": [
       {
         "title": "Exemplo de requisição:",
-        "content": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c\"\n    \"password\": \"newPassword\",\n    \"newPassword\": \"newPassword\"\n}",
+        "content": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c\"\n    \"password\": \"newPassword\",\n    \"confirmPassword\": \"newPassword\"\n}",
         "type": "json"
       }
     ],
